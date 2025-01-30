@@ -1,4 +1,6 @@
 import { Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 import Sidebar from "@/components/Sidebar";
 
 export default function AppLayout() {
@@ -17,6 +19,7 @@ export default function AppLayout() {
           Todos los derechos reservados {new Date().getFullYear()}
         </p>
       </footer>
+      <ToastContainer pauseOnFocusLoss={false} pauseOnHover={false}/>
     </>
   );
 }

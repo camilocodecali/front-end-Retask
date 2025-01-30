@@ -1,26 +1,18 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import ErrorMessage from "../ErrorMessage";
+import { ProjectFormData } from "types";
 
 type ProjectFormProps = {
-  register: UseFormRegister<{
-    projectName: string,
-    description: string,
-    clientName: string,
-    category: string,
-    startDate: string,
-    endDate: string,
-    folderProject: string,
-  }>,
-  errors: FieldErrors<{
-    projectName: string,
-    description: string,
-    clientName: string,
-    category: string,
-    startDate: string,
-    endDate: string,
-    folderProject: string,
-  }>
-}
+  register: UseFormRegister<ProjectFormData>;
+  errors: FieldErrors<ProjectFormData>;
+};
+
+const projectCategories = [
+  "web",
+  "design",
+  "Social Media",
+  "Digital Strategy",
+] as const;
 
 export default function ProjectForm({ register, errors }: ProjectFormProps) {
   return (
@@ -97,9 +89,11 @@ export default function ProjectForm({ register, errors }: ProjectFormProps) {
               required: "La categoría del proyecto es obligatorio",
             })}
           >
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
+            <option value="">--Seleccionar--</option>
+            {projectCategories.map(projectCategory => (
+              <option key={projectCategory} value={projectCategory}>{projectCategory}</option>
+            ))}
+
           </select>
           {errors.category && (
             <ErrorMessage>{errors.category.message}</ErrorMessage>
