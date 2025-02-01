@@ -24,6 +24,16 @@ export const dashboardProjectSchema = z.array(
     })
 )
 
+export const editProjectSchema = projectSchema.pick({
+        projectName: true,
+        description: true,
+        clientName: true,
+        startDate: true,
+        endDate: true,
+        folderProject: true
+
+    })
+
 export type Project = z.infer<typeof projectSchema>
 export type ProjectFormData = Pick<Project, 'projectName' | 'description' | 'clientName' | 'category' | 'startDate' | 'endDate' | 'folderProject'>
 export type ProjectTableData = Pick<Project, '_id' | 'projectName' | 'startDate' |  'clientName' | 'endDate' >

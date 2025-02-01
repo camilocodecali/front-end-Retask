@@ -31,7 +31,7 @@ export default function TableProjects({project}: ProjectFormProps) {
           </Link>
         </MenuItem>
         <MenuItem>
-          <Link className="py-1 border-b-1 border-gray-300 block data-[focus]:bg-blue-100" to="/support">
+          <Link className="py-1 border-b-1 border-gray-300 block data-[focus]:bg-blue-100" to={`/projects/${project._id}/edit`}>
             Editar Proyecto
           </Link>
         </MenuItem>

@@ -14,7 +14,7 @@ export default function router() {
                 <Route path="/" element={<DashboardView/>} index/>
                 <Route path="/projects" element={<ProjectsView/>}/>
                 <Route path="/projects/create" element={<CreateProjectView/>}/>
-                <Route path="/projects/edit" element={<EditProjectView/>}/>
+                <Route path="/projects/:projectId/edit" element={<EditProjectView/>}/>
             </Route>
         </Routes>
         </BrowserRouter>
