@@ -28,6 +28,7 @@ export const editProjectSchema = projectSchema.pick({
         projectName: true,
         description: true,
         clientName: true,
+        category: true,
         startDate: true,
         endDate: true,
         folderProject: true

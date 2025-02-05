@@ -9,8 +9,6 @@ export default function ProjectsView() {
     queryFn: getProjects,
   });
 
-  console.log(data);
-
   if (isLoading) return "Cargando....";
 
   if (data)

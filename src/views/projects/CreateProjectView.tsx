@@ -30,7 +30,7 @@ export default function CreateProjectView() {
     },
     onSuccess: (data) => {
       toast.success(data)
-      navigate('/')
+      navigate('/projects')
     }
   })
 
