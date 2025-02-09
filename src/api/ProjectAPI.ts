@@ -1,6 +1,6 @@
 import api from "@/lib/axios";
 import { isAxiosError } from "axios";
-import { dashboardProjectSchema, editProjectSchema, Project, ProjectFormData } from "@/types/index";
+import { dashboardProjectSchema, editProjectSchema, Project, ProjectFormData, projectSchema } from "@/types/index";
 
 export async function createProject(formData: ProjectFormData) {
     try {
@@ -46,6 +46,20 @@ export async function getProjectById(id:Project['_id']) {
     }
 }
 
+export async function getFullProject(id:Project['_id']) {
+    try {
+        const {data} = await api(`/projects/${id}`)
+        const response = projectSchema.safeParse(data)
+        if(response.success){
+            return response.data
+        }
+    } catch (error) {
+        if(isAxiosError(error) && error.response){
+            throw  new Error(error.response.data.error)
+        }
+    }
+}
+
 type ProjectAPIType = {
     formData: ProjectFormData,
     projectId: Project['_id']
@@ -53,7 +67,19 @@ type ProjectAPIType = {
 
 export async function updateProject({formData, projectId}: ProjectAPIType ) {
     try {
-        const {data} = await api.put(`/projects/${projectId}`, formData)
+        const {data} = await api.put<string>(`/projects/${projectId}`, formData)
+        return data
+    } catch (error) {
+        if(isAxiosError(error) && error.response){
+            throw  new Error(error.response.data.error)
+        }
+    }
+}
+
+export async function deleteProject(projectId: Project['_id'] ) {
+    try {
+        const url = `/projects/${projectId}`
+        const {data} = await api.delete<string>(url)
         return data
     } catch (error) {
         if(isAxiosError(error) && error.response){

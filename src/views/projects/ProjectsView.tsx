@@ -67,13 +67,13 @@ export default function ProjectsView() {
             <table className="table-auto w-full border-collapse text-left">
               <thead>
                 <tr>
-                  <th>Título</th>
-                  <th>Fecha de Inicio</th>
-                  <th>Cliente</th>
-                  <th>Líder de proyecto</th>
-                  <th>Estado</th>
-                  <th>Fecha de finalización</th>
-                  <th>Acciones</th>
+                  <th className="border-b-1 border-slate-400 p-2">Título</th>
+                  <th className="border-b-1 border-slate-400 p-2">Fecha de Inicio</th>
+                  <th className="border-b-1 border-slate-400 p-2">Cliente</th>
+                  <th className="border-b-1 border-slate-400 p-2">Líder de proyecto</th>
+                  <th className="border-b-1 border-slate-400 p-2">Estado</th>
+                  <th className="border-b-1 border-slate-400 p-2">Fecha de finalización</th>
+                  <th className="border-b-1 border-slate-400 p-2">Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -95,7 +95,7 @@ export default function ProjectsView() {
         <div className="fixed bottom-10 right-10">
           <Link
             to="/projects/create"
-            className="bg-green-600 hover:bg-green-700 text-white text-lg font-bold py-8 px-4 rounded-full shadow-lg"
+            className="bg-green-600 hover:bg-green-700 text-white text-lg font-bold py-9 px-4 rounded-full shadow-lg"
           >
             + Crear
           </Link>
