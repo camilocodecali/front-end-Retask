@@ -1,113 +1,99 @@
+import { TaskFormData } from "@/types/index"
+import { FieldErrors, UseFormRegister } from "react-hook-form"
+import ErrorMessage from "../ErrorMessage"
 
+type TaskFormProps = {
+  register: UseFormRegister<TaskFormData>
+  errors: FieldErrors<TaskFormData>
+}
 
-export default function TaskForm() {
+export default function TaskForm({register, errors}: TaskFormProps) {
   return (
     <>
                         <div className="mb-5 grid grid-cols-1 gap-4">
                       <div>
                         <label
                           className="text-gray-700 capitalize font-bold text-sm"
-                          htmlFor="nombre"
+                          htmlFor="taskName"
                         >
                           Título
                         </label>
                         <input
-                          id="nombre"
+                          id="taskName"
                           type="text"
                           className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-lg"
                           placeholder="Título de la tarea"
+                          {...register('taskName', {required: 'El nombre de la tarea es obligatorio'})}
                         />
+                        {errors.taskName && (<ErrorMessage>{errors.taskName.message}</ErrorMessage>)}
                       </div>
                     </div>
                     <div className="mb-5 grid grid-cols-2 gap-4">
                       <div>
                         <label
                           className="text-gray-700 capitalize font-bold text-sm"
-                          htmlFor="proyecto"
-                        >
-                          Proyecto
-                        </label>
-                        <input
-                          id="proyecto"
-                          type="text"
-                          className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-lg"
-                          disabled
-                        />
-                      </div>
-                      <div>
-                        <label
-                          className="text-gray-700 capitalize font-bold text-sm"
-                          htmlFor="colaborador"
-                        >
-                          Responsable
-                        </label>
-                        <select
-                          id="colaborador"
-                          className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-lg"
-                        >
-                          <option value="">--Seleccionar--</option>
-                          
-                        </select>
-                      </div>
-                    </div>
-                    <div className="mb-5 grid grid-cols-2 gap-4">
-                      <div>
-                        <label
-                          className="text-gray-700 capitalize font-bold text-sm"
-                          htmlFor="fechaInicio"
+                          htmlFor="startDate"
                         >
                           Fecha de inicio
                         </label>
                         <input
-                          id="fechaInicio"
+                          id="startDate"
                           type="date"
                           className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-lg"
+                          {...register('startDate', {required: 'La fecha de inicio de la tarea es obligatoria'})}
                         />
+                        {errors.startDate && (<ErrorMessage>{errors.startDate.message}</ErrorMessage>)}
                       </div>
                       <div>
                         <label
                           className="text-gray-700 capitalize font-bold text-sm"
-                          htmlFor="fechaEntrega"
+                          htmlFor="endDate"
                         >
                           Fecha Entrega
                         </label>
                         <input
-                          id="fechaEntrega"
+                          id="endDate"
                           type="date"
                           className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-lg"
+                          {...register('endDate', {required: 'La fecha de entrega de la tarea es obligatoria'})}
                         />
+                        {errors.endDate && (<ErrorMessage>{errors.endDate.message}</ErrorMessage>)}
                       </div>
                     </div>
                     <div className="mb-5 grid grid-cols-1 gap-4">
                       <div>
                         <label
                           className="text-gray-700 capitalize font-bold text-sm"
-                          htmlFor="linkRecursos"
+                          htmlFor="folderProject"
                         >
                           Link recursos de la tarea
                         </label>
                         <input
-                          id="linkRecursos"
+                          id="folderProject"
                           type="text"
                           className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-lg"
                           placeholder="Pegue aquí el de recursos"
+                          {...register('folderProject', {required: 'La fecha de entrega de la tarea es obligatoria'})}
 
                         />
+                        {errors.folderProject && (<ErrorMessage>{errors.folderProject.message}</ErrorMessage>)}
                       </div>
                     </div>
 
                     <div className="mb-5">
                       <label
                         className="text-gray-700 uppercase font-bold text-sm"
-                        htmlFor="descripcion"
+                        htmlFor="taskDescription"
                       >
                         Descripción
                       </label>
                       <textarea
-                        id="descripcion"
+                        id="taskDescription"
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         placeholder="Descripción del Proyecto"
+                        {...register('taskDescription', {required: 'La descripción de la tarea es obligatoria'})}
                       />
+                      {errors.taskDescription && (<ErrorMessage>{errors.taskDescription.message}</ErrorMessage>)}
                     </div>
     </>
   )

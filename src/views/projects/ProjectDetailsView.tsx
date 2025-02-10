@@ -9,6 +9,7 @@ import {  useQuery } from "@tanstack/react-query";
 import {  getFullProject } from "@/api/ProjectAPI";
 import AddTaskModal from "@/components/tasks/AddTaskModal";
 import ProjectCard from "@/components/projects/ProjectCard";
+import TaskList from "@/components/tasks/TaskList";
 
 export default function ProjectDetailsView() {
   const params = useParams();
@@ -45,6 +46,8 @@ export default function ProjectDetailsView() {
             <div></div>
           </div>
         </div>
+
+        <TaskList tasks={data.tasks}/>
         <AddTaskModal />
       </>
     );
