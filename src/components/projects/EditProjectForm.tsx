@@ -54,7 +54,7 @@ export default function EditProjectForm({project, projectId}: ProjectEditProps) 
     <div className="grid grid-cols-2 gap-4">
       <h1 className="text-3xl text-gray-800">Editar Proyectos</h1>
       <div className="flex justify-end">
-      <Link to="/projects" className="bg-gray-700 hover:bg-gray-500 text-white px-10 py-2 rounded-lg cursor-pointer transition-colors">Volver</Link>
+      <Link to="/projects" className="bg-back hover:bg-back-hover text-white px-10 py-2 rounded-lg cursor-pointer transition-colors">Volver</Link>
       </div>
     </div>
       <div className="mt-10 justify-center bg-white shadow py-10 px-5 w-full h-full rounded-lg">

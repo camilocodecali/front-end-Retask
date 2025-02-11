@@ -67,13 +67,13 @@ export default function ProjectsView() {
             <table className="table-auto w-full border-collapse text-left">
               <thead>
                 <tr>
-                  <th className="border-b-1 border-slate-400 p-2">Título</th>
-                  <th className="border-b-1 border-slate-400 p-2">Fecha de Inicio</th>
-                  <th className="border-b-1 border-slate-400 p-2">Cliente</th>
-                  <th className="border-b-1 border-slate-400 p-2">Líder de proyecto</th>
-                  <th className="border-b-1 border-slate-400 p-2">Estado</th>
-                  <th className="border-b-1 border-slate-400 p-2">Fecha de finalización</th>
-                  <th className="border-b-1 border-slate-400 p-2">Acciones</th>
+                  <th className="border-b-1 border-slate-200 p-2 pb-5">Título</th>
+                  <th className="border-b-1 border-slate-200 p-2 pb-5">Fecha de Inicio</th>
+                  <th className="border-b-1 border-slate-200 p-2 pb-5">Cliente</th>
+                  <th className="border-b-1 border-slate-200 p-2 pb-5">Líder de proyecto</th>
+                  <th className="border-b-1 border-slate-200 p-2 pb-5">Estado</th>
+                  <th className="border-b-1 border-slate-200 p-2 pb-5">Fecha de finalización</th>
+                  <th className="border-b-1 border-slate-200 p-2 pb-5">Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -95,7 +95,7 @@ export default function ProjectsView() {
         <div className="fixed bottom-10 right-10">
           <Link
             to="/projects/create"
-            className="bg-green-600 hover:bg-green-700 text-white text-lg font-bold py-9 px-4 rounded-full shadow-lg"
+            className="bg-success hover:bg-success-hover text-white text-lg font-bold py-9 px-4 rounded-full shadow-lg cursor-pointer"
           >
             + Crear
           </Link>

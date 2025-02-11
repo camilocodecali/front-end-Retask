@@ -21,7 +21,7 @@ export default function TaskForm({register, errors}: TaskFormProps) {
                         <input
                           id="taskName"
                           type="text"
-                          className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-lg"
+                          className="border-1 border-slate-500 w-full p-2 mt-2 placeholder-gray-400 rounded-lg"
                           placeholder="Título de la tarea"
                           {...register('taskName', {required: 'El nombre de la tarea es obligatorio'})}
                         />
@@ -39,7 +39,7 @@ export default function TaskForm({register, errors}: TaskFormProps) {
                         <input
                           id="startDate"
                           type="date"
-                          className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-lg"
+                          className="border-1 border-slate-500 w-full p-2 mt-2 placeholder-gray-400 rounded-lg"
                           {...register('startDate', {required: 'La fecha de inicio de la tarea es obligatoria'})}
                         />
                         {errors.startDate && (<ErrorMessage>{errors.startDate.message}</ErrorMessage>)}
@@ -54,7 +54,7 @@ export default function TaskForm({register, errors}: TaskFormProps) {
                         <input
                           id="endDate"
                           type="date"
-                          className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-lg"
+                          className="border-1 border-slate-500 w-full p-2 mt-2 placeholder-gray-400 rounded-lg"
                           {...register('endDate', {required: 'La fecha de entrega de la tarea es obligatoria'})}
                         />
                         {errors.endDate && (<ErrorMessage>{errors.endDate.message}</ErrorMessage>)}
@@ -71,9 +71,9 @@ export default function TaskForm({register, errors}: TaskFormProps) {
                         <input
                           id="folderProject"
                           type="text"
-                          className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-lg"
+                          className="border-1 border-slate-500 w-full p-2 mt-2 placeholder-gray-400 rounded-lg"
                           placeholder="Pegue aquí el de recursos"
-                          {...register('folderProject', {required: 'La fecha de entrega de la tarea es obligatoria'})}
+                          {...register('folderProject', {required: 'La carpeta de la tarea es obligatoria'})}
 
                         />
                         {errors.folderProject && (<ErrorMessage>{errors.folderProject.message}</ErrorMessage>)}
@@ -89,7 +89,7 @@ export default function TaskForm({register, errors}: TaskFormProps) {
                       </label>
                       <textarea
                         id="taskDescription"
-                        className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                        className="border-1 border-slate-500 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         placeholder="Descripción del Proyecto"
                         {...register('taskDescription', {required: 'La descripción de la tarea es obligatoria'})}
                       />

@@ -1,4 +1,5 @@
 import {
+  Link,
   Navigate,
   useLocation,
   useNavigate,
@@ -10,6 +11,7 @@ import {  getFullProject } from "@/api/ProjectAPI";
 import AddTaskModal from "@/components/tasks/AddTaskModal";
 import ProjectCard from "@/components/projects/ProjectCard";
 import TaskList from "@/components/tasks/TaskList";
+import EditTaskData from "@/components/tasks/EditTaskData";
 
 export default function ProjectDetailsView() {
   const params = useParams();
@@ -29,16 +31,20 @@ export default function ProjectDetailsView() {
 
   if (data)
     return (
-      <>
+      <div className="w-full grid grid-col-1">
+        <div className="flex justify-end">
+      <Link to="/projects" className="bg-back hover:bg-back-hover text-white px-10 py-2 rounded-lg cursor-pointer transition-colors">Volver</Link>
+      </div>
+      
         <ProjectCard project={data} />
 
-        <div className="bg-blue-400 shadow mt-10 rounded-lg p-5">
-          <div className="mb-5 grid grid-cols-2 items-center">
+        <div className="bg-bg-second shadow mt-10 rounded-lg p-5">
+          <div className="mb-5 grid md:grid-cols-2 items-center">
             <h1 className="text-4xl text-white">Tareas del Proyectos</h1>
 
             <button
               onClick={() => navigate(location.pathname + "?newTask=true")}
-              className="bg-green-600 hover:bg-green-500 text-white text-lg font-bold py-2 px-8  rounded-lg shadow-lg text-center"
+              className="bg-success hover:bg-success-hover text-white text-lg font-bold py-2 mt-5 md:mt-0 px-8 rounded-lg shadow-lg text-center cursor-pointer"
             >
               + Crear
             </button>
@@ -49,6 +55,7 @@ export default function ProjectDetailsView() {
 
         <TaskList tasks={data.tasks}/>
         <AddTaskModal />
-      </>
+        <EditTaskData/>
+      </div>
     );
 }

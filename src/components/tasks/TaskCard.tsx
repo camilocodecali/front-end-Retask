@@ -1,17 +1,32 @@
+import { formatDate } from "@/helpers/formatDate"
 import { TaskProject } from "@/types/index"
 import { Menu, Transition } from "@headlessui/react"
 import {EllipsisVerticalIcon} from '@heroicons/react/20/solid'
+
 import { Fragment } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 
 type TaskCardProps = {
     task: TaskProject
 }
 
 export default function TaskCard({task}: TaskCardProps) {
+
+
+    const navigate = useNavigate()
+    const location = useLocation()
+
+
+
   return (
-    <li className="p-5 bg-white border border-slate-300 flex justify-between gap-3">
+    <li className="p-5 bg-white flex justify-between gap-3 shadow rounded-xl">
         <div className="min-w-0 flex flex-col gap-y-4">
             <button type="button" className="text-xl font-bold text-slate-600 text-left">{task.taskName}</button>
+            <p>{task.taskDescription}</p>
+            <div>
+            <b>Fecha de entrega:</b><span> {formatDate(task.endDate)}</span>
+            </div>
+            
         </div>
         <div className="flex shrink-0  gap-x-6">
     <Menu as="div" className="relative flex-none">
@@ -30,7 +45,7 @@ export default function TaskCard({task}: TaskCardProps) {
                     </button>
                 </Menu.Item>
                 <Menu.Item>
-                    <button type='button' className='block px-3 py-1 text-sm leading-6 text-gray-900'>
+                    <button onClick={()=> navigate(location.pathname+ `?editTask=${task._id}`)} type='button' className='block px-3 py-1 text-sm leading-6 text-gray-900'>
                         Editar Tarea
                     </button>
                 </Menu.Item>

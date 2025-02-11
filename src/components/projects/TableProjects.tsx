@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteProject } from "@/api/ProjectAPI";
 import { toast } from "react-toastify";
+import { formatDate } from "@/helpers/formatDate";
 
 
 type ProjectFormProps = {
@@ -25,19 +26,19 @@ export default function TableProjects({project}: ProjectFormProps) {
   return (
 
       <tr key={project._id}>
-        <td className="border-b-1 border-slate-300 p-2">
+        <td className=" p-10">
           {project.projectName}
         </td>
-        <td className="border-b-1 border-slate-300 p-2">{project.startDate}</td>
-        <td className="border-b-1 border-slate-300 p-2">
+        <td className=" p-10">{formatDate(project.startDate)}</td>
+        <td className=" p-10">
           {project.clientName}
         </td>
-        <td className="border-b-1 border-slate-300 p-2">Lider</td>
-        <td className="border-b-1 border-slate-300 p-2">Estado</td>
-        <td className="border-b-1 border-slate-300 p-2">{project.endDate}</td>
-        <td className="border-b-1 border-slate-300 p-2">
+        <td className=" p-10">Lider</td>
+        <td className=" p-10">Estado</td>
+        <td className=" p-10">{formatDate(project.endDate)}</td>
+        <td className=" p-10">
         <Menu>
-      <MenuButton className="px-3 py-2 bg-green-400 rounded-lg hover:bg-green-300 text-white font-bold">Acciones</MenuButton>
+      <MenuButton className="px-3 py-2 bg-success rounded-lg hover:bg-success-hover text-white font-bold cursor-p">Acciones</MenuButton>
       <MenuItems className="bg-white p-5 rounded-2xl shadow-2xl" anchor="bottom">
         <MenuItem>
           <Link className="py-1 border-b-1 border-gray-300 block data-[focus]:bg-blue-100" to={`/projects/${project._id}`}>

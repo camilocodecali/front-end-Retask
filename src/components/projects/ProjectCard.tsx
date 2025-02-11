@@ -32,11 +32,11 @@ export default function ProjectCard({project}: ProjectCardProps) {
 
   if(project) return (
     <div className="bg-white w-full shadow mt-10 rounded-lg p-5">
-    <div className="flex justify-between mb-10">
+    <div className="md:flex justify-between mb-10 sm:grid sm:grid-cols-1">
       <h1 className="text-3xl">
         <b>Proyecto:</b> {project.projectName}
       </h1>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center md:gap-4 gap-2 md:py-0 py-5">
         <Link
           to={`/projects/${project._id}/edit`}
           className="bg-sky-500 py-2 px-4 rounded-lg text-white hover:bg-sky-700 font-bold"
@@ -87,7 +87,7 @@ export default function ProjectCard({project}: ProjectCardProps) {
     <div>
       <b>Carpeta del proyecto: {project.folderProject}</b>
     </div>
-    <div className="flex justify-end mb-5">
+    <div className="flex justify-end mb-5 mt-5">
       <div className="flex items-center gap-2 text-gray-500 hover:text-black">
         <b>Compartir:</b>
         <a>

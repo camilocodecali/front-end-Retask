@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+
+@theme {
+    --color-success: #10B981;
+    --color-success-hover: #109674;
+    --color-back: #8E8E8E;
+    --color-back-hover: #555555;
+    --color-bg-second: #516CED;
+    --color-status-pending: #64748B;
+    --color-status-onHold: #BB2E2E;
+    --color-status-progress: #516CED;
+    --color-status-review: #F0950C;
+    --color-status-complete: #0D9F16;
+  }
