@@ -12,6 +12,8 @@ export const taskSchema = z.object({
     startDate: z.string(),
     endDate: z.string(),
     folderProject: z.string(),
+    createdAt: z.string(),
+    updatedAt: z.string()
 })
 
 export const taskProjectSchema = taskSchema.pick({
