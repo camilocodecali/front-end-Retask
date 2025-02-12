@@ -4,10 +4,11 @@ import { Link, Navigate, useLocation, useNavigate, useParams } from "react-route
 import correo from "../../../public/email.png";
 import whatsapp from "../../../public/whatsapp.png";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteTask, getTaskById } from "@/api/TaskAPI";
+import { deleteTask, getTaskById, updateStatus } from "@/api/TaskAPI";
 import { toast } from "react-toastify";
 import { formatDate } from "@/helpers/formatDate";
 import { statusTranslations } from "@/locales/es";
+import { TaskStatus } from "@/types/index";
 
 export default function DetailTaskModal() {
     const location = useLocation()
@@ -29,7 +30,7 @@ export default function DetailTaskModal() {
 
     const queryClient = useQueryClient()
 
-    const {mutate} = useMutation({
+    const mutationDelete = useMutation({
       mutationFn: deleteTask,
       onError: (error) => {
           toast.error(error.message)
@@ -41,12 +42,37 @@ export default function DetailTaskModal() {
       }
   })
 
+  const mutationStatus = useMutation({
+    mutationFn: updateStatus,
+    onError: (error) => {
+      toast.error(error.message)
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({queryKey: ["project",projectId]})
+      queryClient.invalidateQueries({queryKey: ["task",taskId]})
+      toast.success(data)
+      navigate(location.pathname, { replace: true })
+    }
+  })
+
   const statusStyles : {[key: string]: string} = {
     pending: 'bg-status-pending',
     onHold: 'bg-status-onHold',
     inProgress: 'bg-status-progress',
     underReview: 'bg-status-review',
     completed: 'bg-status-complete',
+  }
+
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const status = e.target.value as TaskStatus
+    const data = {
+      projectId,
+      taskId,
+      status
+    }
+    mutationStatus.mutate(data)
+    
   }
 
 
@@ -103,7 +129,7 @@ export default function DetailTaskModal() {
                         >
                           Editar tarea
                         </button>
-                        <button onClick={() => mutate({projectId, taskId})} className="border-2 border-red-500 text-red-500  py-2 px-4 rounded-lg  hover:bg-red-500 hover:text-white font-bold cursor-pointer">
+                        <button onClick={() => mutationDelete.mutate({projectId, taskId})} className="border-2 border-red-500 text-red-500  py-2 px-4 rounded-lg  hover:bg-red-500 hover:text-white font-bold cursor-pointer">
                           Eliminar
                         </button>
                       </div>
@@ -112,8 +138,16 @@ export default function DetailTaskModal() {
 
                   <div className="bg-white w-full">
                     <div className="flex items-center mb-5">
-                      <b className="mr-5">Estado:</b><p className={`text-white p-2 pl-5 pr-5 rounded-2xl ${statusStyles[data.status]}`}> {statusTranslations[data.status]}</p> 
-                      
+                      <b className="mr-5">Estado Actual:</b>
+                      <select
+                      className={`text-white p-2 pl-5 pr-5 rounded-2xl ${statusStyles[data.status]}`}
+                      defaultValue={data.status}
+                      onChange={handleChange}
+                      >
+                        {Object.entries(statusTranslations).map(([key, value]) => (
+                            <option className="bg-white text-black" key={key} value={key}>{value}</option>
+                          ))}
+                      </select>
                     </div>
                     <div className="mb-5">
                       <b>Decripción:</b> {data.taskDescription}
