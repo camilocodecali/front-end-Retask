@@ -1,17 +1,23 @@
 import {z} from "zod"
 
+export const userPositionSchema = z.enum(["webDeveloper", "design", "socialMedia", "digitalStrategy", "projectManager", "comunityManager", "client", "general", "admin"])
+export type UserPosition = z.infer<typeof userPositionSchema>
+
 /**Auth user */
 export const authSchema = z.object({
     email: z.string(),
     password: z.string(),
+    password_confirmation: z.string(),
     name: z.string(),
     lastName: z.string(),
     identification: z.string(),
     phone: z.string(),
+    position: userPositionSchema
 })
 
 type Auth = z.infer<typeof authSchema>
 export type UserLoginForm = Pick<Auth, 'email' | 'password'>
+export type UserRegistrationForm = Pick<Auth, 'name' | 'lastName'| 'identification' | 'email' | 'phone' | 'position' | 'password' | 'password_confirmation'>
 
 /**Tasks */
 export const taskStatusSchema = z.enum(["pending", "onHold", "inProgress", "underReview", "completed"])

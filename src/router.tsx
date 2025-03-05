@@ -7,6 +7,8 @@ import EditProjectView from "./views/projects/EditProjectView";
 import ProjectDetailsView from "./views/projects/ProjectDetailsView";
 import AuthLayout from "./layouts/AuthLayout";
 import LoginView from "./views/auth/LoginView";
+import RegisterView from "./views/users/RegisterView";
+import UsersView from "./views/users/UsersView";
 
 
 export default function router() {
@@ -19,7 +21,9 @@ export default function router() {
                 <Route path="/projects/create" element={<CreateProjectView/>}/>
                 <Route path="/projects/:projectId/" element={<ProjectDetailsView/>}/>
                 <Route path="/projects/:projectId/edit" element={<EditProjectView/>}/>
-                
+                <Route path="/users/register" element={<RegisterView/>}/>
+                <Route path="/users/" element={<UsersView/>}/>
+
             </Route>
             <Route element={<AuthLayout/>}>
                 <Route path="/auth/login" element={<LoginView/>}/>
