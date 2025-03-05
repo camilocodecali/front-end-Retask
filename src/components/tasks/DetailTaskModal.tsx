@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Link, Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
-import correo from "../../../public/email.png";
-import whatsapp from "../../../public/whatsapp.png";
+import correo from "/email.png?url";
+import whatsapp from "/whatsapp.png?url";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteTask, getTaskById, updateStatus } from "@/api/TaskAPI";
 import { toast } from "react-toastify";
