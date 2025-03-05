@@ -10,6 +10,8 @@ export default function Sidebar() {
             <Link className="block mb-5" to="/">Inicio</Link>
             <Link className="block mb-5" to="/projects">Projectos</Link>
             <Link className="block mb-5 ml-2 text-sm md:block hidden" to="/projects/create">Crear Projectos</Link>
+            <Link className="block mb-5" to="/users">Usuarios</Link>
+            <Link className="block mb-5 ml-2 text-sm md:block hidden" to="/users/register">Crear Usuarios</Link>
         </div>
     </aside>
   )

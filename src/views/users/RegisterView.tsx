@@ -1,7 +1,11 @@
 import UserForm from "@/components/users/UserForm";
 import { UserRegistrationForm } from "@/types/index";
 import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { createAccount } from "@/api/AuthAPI";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function RegisterView() {
   const initialValues = {
@@ -15,9 +19,23 @@ function RegisterView() {
     position: undefined
 }
 
-const {register, handleSubmit, watch, formState:{errors}} = useForm<UserRegistrationForm>({defaultValues: initialValues})
+const navigate = useNavigate()
 
-const handleRegister = (formData: UserRegistrationForm) => console.log(formData);
+const {register, reset, handleSubmit, watch, formState:{errors}} = useForm<UserRegistrationForm>({defaultValues: initialValues})
+
+const {mutate} = useMutation({
+  mutationFn: createAccount,
+  onError: (error) => {
+    toast.error(error.message)
+  },
+  onSuccess: (data) => {
+    toast.success(data)
+    reset()
+    navigate('/users')
+  }
+})
+
+const handleRegister = (formData: UserRegistrationForm) => mutate(formData);
   return (
     <>
       <div className="grid grid-cols-2 gap-4">

@@ -53,7 +53,10 @@ function UserForm({ register, errors, watch }: UserFormProps) {
             <ErrorMessage>{errors.lastName.message}</ErrorMessage>
           )}
         </div>
-        <div>
+
+      </div>
+      <div className="mb-5 grid grid-cols-2 gap-4">
+      <div>
           <label
             className="text-gray-700 capitalize font-bold text-sm"
             htmlFor="identification"
@@ -73,8 +76,6 @@ function UserForm({ register, errors, watch }: UserFormProps) {
             <ErrorMessage>{errors.identification.message}</ErrorMessage>
           )}
         </div>
-      </div>
-      <div className="mb-5 grid grid-cols-2 gap-4">
         <div>
           <label
             className="text-gray-700 capitalize font-bold text-sm"
@@ -93,7 +94,10 @@ function UserForm({ register, errors, watch }: UserFormProps) {
           />
           {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         </div>
-        <div>
+
+      </div>
+      <div className="mb-5 grid grid-cols-2 gap-4">
+      <div>
           <label
             className="text-gray-700 capitalize font-bold text-sm"
             htmlFor="phone"
@@ -111,8 +115,6 @@ function UserForm({ register, errors, watch }: UserFormProps) {
           />
           {errors.phone && <ErrorMessage>{errors.phone.message}</ErrorMessage>}
         </div>
-      </div>
-      <div className="mb-5 grid grid-cols-2 gap-4">
         <div>
           <label
             className="text-gray-700 capitalize font-bold text-sm"
@@ -173,7 +175,7 @@ function UserForm({ register, errors, watch }: UserFormProps) {
           </label>
           <input
             id="password_confirmation"
-            type="password_confirmation"
+            type="password"
             placeholder="Repite la Password"
             className="border-1 border-gray-400 w-full p-2 mt-2 placeholder-gray-400 rounded-lg"
             {...register("password_confirmation", {
