@@ -30,7 +30,7 @@ export async function authenticateUser(formData:UserLoginForm) {
     try {
         const url= '/auth/login'
         const {data} = await api.post<string>(url, formData)
-        localStorage.setItem('AUT_TOKEN', data)
+        localStorage.setItem('AUTH_TOKEN', data)
         
         return data
     } catch (error) {
@@ -40,4 +40,15 @@ export async function authenticateUser(formData:UserLoginForm) {
     }
     
     
+}
+
+export async function getUser() {
+    try {
+        const {data} = await api('/auth/user')
+        return data
+    } catch (error) {
+        if(isAxiosError(error) && error.response){
+            throw  new Error(error.response.data.error)
+        }
+    }
 }

@@ -12,12 +12,23 @@ export const authSchema = z.object({
     lastName: z.string(),
     identification: z.string(),
     phone: z.string(),
-    position: userPositionSchema
+    position: userPositionSchema,
+    token: z.string()
 })
 
 type Auth = z.infer<typeof authSchema>
 export type UserLoginForm = Pick<Auth, 'email' | 'password'>
 export type UserRegistrationForm = Pick<Auth, 'name' | 'lastName'| 'identification' | 'email' | 'phone' | 'position' | 'password' | 'password_confirmation'>
+
+/**Users */
+export const userSchema = authSchema.pick({
+    name: true,
+    email: true,
+    position: true
+}).extend({
+    _id: z.string()
+})
+
 
 /**Tasks */
 export const taskStatusSchema = z.enum(["pending", "onHold", "inProgress", "underReview", "completed"])

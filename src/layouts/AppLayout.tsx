@@ -1,10 +1,19 @@
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Sidebar from "@/components/Sidebar";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function AppLayout() {
-  return (
+  const {data, isError, isLoading} = useAuth()
+  console.log(data);
+  
+  if(isLoading) return 'Cargando...'
+  if(isError) {
+    return <Navigate to='/auth/login'/>
+  }
+
+  if(data) return (
     <>
       <div className="bg-gray-100">
         <div className="md:flex md:min-h-screen">
