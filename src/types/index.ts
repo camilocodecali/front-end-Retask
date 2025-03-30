@@ -30,6 +30,21 @@ export const userSchema = authSchema.pick({
 })
 
 
+export const dashboardUserSchema = z.array(
+    authSchema.pick({
+        name: true,
+        identification: true,
+        phone: true,
+        email: true,
+        position: true,
+    }).extend({
+        _id: z.string()
+    })
+)
+
+export type User = z.infer<typeof userSchema>
+export type UserTableData = z.infer<typeof dashboardUserSchema>
+
 /**Tasks */
 export const taskStatusSchema = z.enum(["pending", "onHold", "inProgress", "underReview", "completed"])
 export type TaskStatus = z.infer<typeof taskStatusSchema>

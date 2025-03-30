@@ -6,8 +6,6 @@ import { useAuth } from "@/hooks/useAuth";
 
 export default function AppLayout() {
   const {data, isError, isLoading} = useAuth()
-  console.log(data);
-  
   if(isLoading) return 'Cargando...'
   if(isError) {
     return <Navigate to='/auth/login'/>
@@ -17,7 +15,9 @@ export default function AppLayout() {
     <>
       <div className="bg-gray-100">
         <div className="md:flex md:min-h-screen">
-          <Sidebar />
+          <Sidebar
+            user={data}
+          />
           <main className="md:w-screen pt-20 md:pl-20 md:pr-20 pl-2 pr-2">
             <Outlet />
           </main>
