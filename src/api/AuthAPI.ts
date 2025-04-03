@@ -1,6 +1,6 @@
 import api from "@/lib/axios";
 import { isAxiosError } from "axios";
-import { UserLoginForm, UserRegistrationForm, userSchema } from "../types";
+import { ConfirmEmail, dashboardUserSchema, UserLoginForm, UserRegistrationForm, userSchema } from "../types";
 
 export async function createAccount(formData:UserRegistrationForm) {
     try {
@@ -14,7 +14,7 @@ export async function createAccount(formData:UserRegistrationForm) {
     }
 }
 
-export async function confirmAccount(formData:UserRegistrationForm['email']) {
+export async function confirmAccount(formData: ConfirmEmail) {
     try {
         const url = '/auth/confirm-account'
         const {data} = await api.post<string>(url, formData)
@@ -58,5 +58,16 @@ export async function getUser() {
 }
 
 export async function getUsers() {
+    try {
+        const {data} = await api('/auth/')
+        const response = dashboardUserSchema.safeParse(data)
+        if(response.success){
+            return response.data
+        }
+    } catch (error) {
+        if(isAxiosError(error) && error.response){
+            throw new Error(error.response.data.error)
+        }
+    }
     
 }

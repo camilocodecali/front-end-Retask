@@ -13,12 +13,14 @@ export const authSchema = z.object({
     identification: z.string(),
     phone: z.string(),
     position: userPositionSchema,
+    confirmed: z.boolean(),
     token: z.string()
 })
 
 type Auth = z.infer<typeof authSchema>
 export type UserLoginForm = Pick<Auth, 'email' | 'password'>
 export type UserRegistrationForm = Pick<Auth, 'name' | 'lastName'| 'identification' | 'email' | 'phone' | 'position' | 'password' | 'password_confirmation'>
+export type ConfirmEmail = Pick<Auth, 'email'>
 
 /**Users */
 export const userSchema = authSchema.pick({
@@ -33,17 +35,31 @@ export const userSchema = authSchema.pick({
 export const dashboardUserSchema = z.array(
     authSchema.pick({
         name: true,
+        lastName: true,
         identification: true,
         phone: true,
         email: true,
         position: true,
+        confirmed: true
     }).extend({
         _id: z.string()
     })
 )
 
+export const userTableSchema = authSchema.pick({
+    name: true,
+    lastName: true,
+    identification: true,
+    phone: true,
+    email: true,
+    position: true,
+    confirmed: true
+}).extend({
+    _id: z.string()
+})
+
 export type User = z.infer<typeof userSchema>
-export type UserTableData = z.infer<typeof dashboardUserSchema>
+export type UserTableData = z.infer<typeof userTableSchema>
 
 /**Tasks */
 export const taskStatusSchema = z.enum(["pending", "onHold", "inProgress", "underReview", "completed"])
