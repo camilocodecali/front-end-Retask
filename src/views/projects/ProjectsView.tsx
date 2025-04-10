@@ -64,7 +64,7 @@ export default function ProjectsView() {
             </div>
           </div>
           <div className="relative overflow-x-auto">
-            <table className="table-auto w-full border-collapse text-left">
+            <table className="table-auto w-full border-collapse text-center">
               <thead>
                 <tr>
                   <th className="border-b-1 border-slate-200 p-2 pb-5">Título</th>

@@ -1,6 +1,6 @@
 import api from "@/lib/axios";
 import { isAxiosError } from "axios";
-import { ConfirmEmail, dashboardUserSchema, UserLoginForm, UserRegistrationForm, userSchema } from "../types";
+import { ConfirmEmail, dashboardUserSchema, User, UserLoginForm, UserRegistrationForm, userSchema } from "../types";
 
 export async function createAccount(formData:UserRegistrationForm) {
     try {
@@ -64,6 +64,30 @@ export async function getUsers() {
         if(response.success){
             return response.data
         }
+    } catch (error) {
+        if(isAxiosError(error) && error.response){
+            throw new Error(error.response.data.error)
+        }
+    }
+    
+}
+
+export async function getUserById(id:User['_id']) {
+    try {
+        const {data} = await api(`/auth/${id}`)
+        return data
+    } catch (error) {
+        if(isAxiosError(error) && error.response){
+            throw new Error(error.response.data.error)
+        }
+    }
+    
+}
+
+export async function deleteUser(id:User['_id']) {
+    try {
+        const {data} = await api.delete(`/auth/${id}`)
+        return data
     } catch (error) {
         if(isAxiosError(error) && error.response){
             throw new Error(error.response.data.error)
