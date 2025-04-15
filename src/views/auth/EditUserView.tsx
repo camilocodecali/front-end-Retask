@@ -12,12 +12,11 @@ function EditUserView() {
       queryFn: ()=> getUserById(userId),
       retry: false
     })
-    console.log(data);
 
   if(isLoading) return 'Cargando...'
   if(isError) return <Navigate to='/404'/>
 
-  if(data) return <EditUserForm/>
+  if(data) return <EditUserForm user={data} userId={userId}/>
 
 }
 
