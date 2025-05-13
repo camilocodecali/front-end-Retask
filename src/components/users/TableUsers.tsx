@@ -69,7 +69,7 @@ export default function TableUsers({ user }: UserTableProps) {
           </button>
         </MenuItem>
         <MenuItem>
-          <Link className="py-1 border-b-1 border-gray-300 block cursor-pointer data-[focus]:bg-blue-100" to={``}>
+          <Link className="py-1 border-b-1 border-gray-300 block cursor-pointer data-[focus]:bg-blue-100" to={`/users/${user._id}/edit`}>
             Editar Usuario
           </Link>
         </MenuItem>

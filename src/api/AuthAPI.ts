@@ -83,6 +83,23 @@ export async function getUserById(id:User['_id']) {
     }
     
 }
+type UserApiType = {
+    formData: UserRegistrationForm,
+    userId: User['_id']
+}
+
+export async function updateUser({formData, userId}: UserApiType) {
+    try {
+        const {data} = await api.put<string>(`/auth/${userId}`, formData)
+        return(data)
+        
+    } catch (error) {
+        if(isAxiosError(error) && error.response){
+            throw new Error(error.response.data.error)
+        }
+    }
+    
+}
 
 export async function deleteUser(id:User['_id']) {
     try {

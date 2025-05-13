@@ -9,9 +9,6 @@ export default function UsersView() {
     queryFn: getUsers
   });
 
-  console.log(data);
-  
-
   if(isLoading) return "Cargando...";
   if(data) return (
 <>

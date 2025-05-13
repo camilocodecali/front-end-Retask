@@ -1,7 +1,10 @@
 import { User, UserRegistrationForm } from "@/types/index";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserForm from "./UserForm";
 import { useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateUser } from "@/api/AuthAPI";
+import { toast } from "react-toastify";
 
 type UserEditProps = {
   user: UserRegistrationForm,
@@ -9,6 +12,7 @@ type UserEditProps = {
 }
 
 export default function EditUserForm({user, userId}: UserEditProps) {
+  const navigate = useNavigate()
   const {register, watch, handleSubmit, formState:{errors}} = useForm({defaultValues:{
     email: user.email,
     password: "",
@@ -20,15 +24,32 @@ export default function EditUserForm({user, userId}: UserEditProps) {
     position: user.position
   }})
 
+  const queryClient = useQueryClient()
+  const {mutate} = useMutation({
+    mutationFn: updateUser,
+    onError: (error) => {
+      toast.error(error.message)
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({queryKey:['users']})
+      queryClient.invalidateQueries({queryKey:['user']})
+      toast.success(data)
+      navigate('/users')
+    }
+  })
+
   const handleForm = (formData: UserRegistrationForm) => {
-    console.log(formData);
-    
+    const data = {
+      formData,
+      userId
+    }
+    mutate(data)
   }
   
   return (
     <>
       <div className="grid grid-cols-2 gap-4">
-        <h1 className="text-3xl text-gray-800">Crear Usuario</h1>
+        <h1 className="text-3xl text-gray-800">Editar Usuario</h1>
         <div className="flex justify-end">
           <Link
             to={`/users/${userId}`}
