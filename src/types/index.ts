@@ -14,7 +14,8 @@ export const authSchema = z.object({
     phone: z.string(),
     position: userPositionSchema,
     confirmed: z.boolean(),
-    token: z.string()
+    token: z.string(),
+    createdAt: z.string(),
 })
 
 type Auth = z.infer<typeof authSchema>
@@ -53,7 +54,8 @@ export const userTableSchema = authSchema.pick({
     phone: true,
     email: true,
     position: true,
-    confirmed: true
+    confirmed: true,
+    createdAt: true
 }).extend({
     _id: z.string()
 })

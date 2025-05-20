@@ -10,6 +10,7 @@ import LoginView from "./views/auth/LoginView";
 import RegisterView from "./views/users/RegisterView";
 import UsersView from "./views/users/UsersView";
 import EditUserView from "./views/auth/EditUserView";
+import UserDetailsView from "./views/users/UserDetailsView";
 
 
 export default function router() {
@@ -24,6 +25,7 @@ export default function router() {
                 <Route path="/projects/:projectId/edit" element={<EditProjectView/>}/>
                 <Route path="/users/register" element={<RegisterView/>}/>
                 <Route path="/users/" element={<UsersView/>}/>
+                <Route path="/users/:userId/" element={<UserDetailsView/>}/>
                 <Route path="/users/:userId/edit" element={<EditUserView/>}/>
 
             </Route>
