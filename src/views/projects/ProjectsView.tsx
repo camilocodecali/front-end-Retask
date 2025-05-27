@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProjects } from "@/api/ProjectAPI";
 import TableProjects from "@/components/projects/TableProjects";
+import Spinner from "@/components/Spinner";
 
 export default function ProjectsView() {
   const { data, isLoading } = useQuery({
@@ -9,7 +10,7 @@ export default function ProjectsView() {
     queryFn: getProjects,
   });
 
-  if (isLoading) return "Cargando....";
+  if (isLoading) return <Spinner/>;
 
   if (data)
     return (
@@ -41,7 +42,7 @@ export default function ProjectsView() {
               />
             </div>
           </div>
-          <div className="flex justify-between mb-10">
+          <div className="flex justify-between mb-10 overflow-x-auto">
             <div className="block md:flex  gap-4">
               <p>Filtrar por:</p>
               <button className="bg-green-300 text-green-950 px-4 text-sm h-6 rounded-lg cursor-pointer font-bold mb-1 md:mb-0">

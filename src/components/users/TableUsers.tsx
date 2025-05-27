@@ -59,7 +59,7 @@ export default function TableUsers({ user }: UserTableProps) {
       <MenuButton className="px-3 py-2 bg-success rounded-lg hover:bg-success-hover text-white font-bold cursor-p">Acciones</MenuButton>
       <MenuItems className="bg-white p-5 rounded-2xl shadow-2xl" anchor="bottom">
         <MenuItem>
-          <Link className="py-1 border-b-1 border-gray-300 block cursor-pointer data-[focus]:bg-blue-100" to={``}>
+          <Link className="py-1 border-b-1 border-gray-300 block cursor-pointer data-[focus]:bg-blue-100" to={`/users/${user._id}`}>
             Ver Usuario
           </Link>
         </MenuItem>

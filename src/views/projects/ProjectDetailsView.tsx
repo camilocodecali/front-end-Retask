@@ -13,6 +13,7 @@ import ProjectCard from "@/components/projects/ProjectCard";
 import TaskList from "@/components/tasks/TaskList";
 import EditTaskData from "@/components/tasks/EditTaskData";
 import DetailTaskModal from "@/components/tasks/DetailTaskModal";
+import Spinner from "@/components/Spinner";
 
 export default function ProjectDetailsView() {
   const params = useParams();
@@ -27,7 +28,7 @@ export default function ProjectDetailsView() {
   });
 
 
-  if (isLoading) return "Cargando...";
+  if (isLoading) return <Spinner/>;
   if (isError) return <Navigate to="/404" />;
 
   if (data)

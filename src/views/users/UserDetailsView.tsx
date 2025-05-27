@@ -1,4 +1,5 @@
 import { getUserById } from "@/api/AuthAPI";
+import Spinner from "@/components/Spinner";
 import UserCard from "@/components/users/UserCard";
 import { useQuery } from "@tanstack/react-query";
 import { Link, Navigate, useParams } from "react-router-dom";
@@ -14,7 +15,7 @@ export default function UserDetailsView() {
         retry: false
     })
     
-    if(isLoading) return 'Cargand...'
+    if(isLoading) return <Spinner/>
     if(isError) return <Navigate to="/404"/>
   if(data) return (
       <div className="w-full grid grid-col-1">

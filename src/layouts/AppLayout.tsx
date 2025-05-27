@@ -18,7 +18,7 @@ export default function AppLayout() {
           <Sidebar
             user={data}
           />
-          <main className="md:w-screen pt-20 md:pl-20 md:pr-20 pl-2 pr-2">
+          <main className="w-full pt-20 px-2 md:px-20 overflow-x-auto">
             <Outlet />
           </main>
         </div>

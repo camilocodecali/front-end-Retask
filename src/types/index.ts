@@ -27,7 +27,7 @@ export type ConfirmEmail = Pick<Auth, 'email'>
 export const userSchema = authSchema.pick({
     name: true,
     email: true,
-    position: true
+    position: true,
 }).extend({
     _id: z.string()
 })
@@ -41,7 +41,8 @@ export const dashboardUserSchema = z.array(
         phone: true,
         email: true,
         position: true,
-        confirmed: true
+        confirmed: true,
+        createdAt: true
     }).extend({
         _id: z.string()
     })

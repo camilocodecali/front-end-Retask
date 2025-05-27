@@ -1,4 +1,5 @@
 import { getUsers } from '@/api/AuthAPI'
+import Spinner from '@/components/Spinner';
 import TableUsers from '@/components/users/TableUsers';
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom';
@@ -9,7 +10,7 @@ export default function UsersView() {
     queryFn: getUsers
   });
 
-  if(isLoading) return "Cargando...";
+  if(isLoading) return <Spinner/>;
   if(data) return (
 <>
 <h1 className="text-4xl">Usuarios</h1>
