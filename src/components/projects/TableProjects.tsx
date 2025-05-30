@@ -12,8 +12,6 @@ type ProjectFormProps = {
 };
 
 export default function TableProjects({ project, user }: ProjectFormProps) {
-  console.log(project);
-  
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: deleteProject,

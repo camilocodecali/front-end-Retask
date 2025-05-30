@@ -120,7 +120,8 @@ export const projectSchema = z.object({
     startDate: z.string(),
     endDate: z.string(),
     folderProject: z.string(),
-    manager: userSchema
+    manager: userSchema,
+    team: z.array(userSchema)
 })
 
 export const dashboardProjectSchema = z.array(
@@ -142,7 +143,7 @@ export const editProjectSchema = projectSchema.pick({
         category: true,
         startDate: true,
         endDate: true,
-        folderProject: true
+        folderProject: true,
 
     })
 

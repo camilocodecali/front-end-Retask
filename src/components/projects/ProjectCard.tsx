@@ -12,7 +12,8 @@ type ProjectCardProps = {
 };
 
 export default function ProjectCard({ project }: ProjectCardProps) {
-
+  console.log(project);
+  
   const params = useParams();
   const projectId = params.projectId!;
   const navigate = useNavigate();
@@ -75,10 +76,15 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
         <div className="grid grid-cols-2 gap-4 mb-5">
           <div>
-            <b>Lider de proyecto: </b>
+            <b>Lider de proyecto: </b> {project.manager.name}
           </div>
-          <div>
-            <b>Responsables: </b>
+          <div className="flex flex-wrap gap-2">
+            
+            <b>Responsables: </b> {project.team.map(member => (
+              <div key={member._id}>
+              <p className="ml-1">{member.name} | </p>
+              </div>
+            ))}
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4 mb-5">
