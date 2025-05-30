@@ -133,3 +133,17 @@ export const editProjectSchema = projectSchema.pick({
 export type Project = z.infer<typeof projectSchema>
 export type ProjectFormData = Pick<Project, 'projectName' | 'description' | 'clientName' | 'category' | 'startDate' | 'endDate' | 'folderProject'>
 export type ProjectTableData = Pick<Project, '_id' | 'projectName' | 'startDate' |  'clientName' | 'endDate' >
+
+/**Team */
+export const teamMemberSchema = authSchema.pick({
+    name: true,
+    lastName: true,
+    email: true,
+    identification: true,
+    phone: true,
+    position: true
+}).extend({
+    _id: z.string()
+})
+export type TeamMember = z.infer<typeof teamMemberSchema>
+export type TeamMemberForm = Pick<TeamMember, 'email'>

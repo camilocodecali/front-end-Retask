@@ -1,3 +1,4 @@
+import AddMemberModal from "@/components/team/AddMemberModal";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 export default function ProjectTeamView() {
@@ -5,8 +6,6 @@ export default function ProjectTeamView() {
   const location = useLocation()
   const params = useParams()
   const projectId = params.projectId!
-  console.log(projectId);
-  
   
   return (
     <div className="w-full grid grid-col-1">
@@ -31,6 +30,7 @@ export default function ProjectTeamView() {
           + Agregar responsables
         </button>
       </div>
+      <AddMemberModal/>
     </div>
   );
 }
