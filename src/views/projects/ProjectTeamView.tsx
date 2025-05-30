@@ -1,11 +1,12 @@
-import { getProjectTeam } from "@/api/TeamAPI";
+import { getProjectTeam, removeUserFromProject } from "@/api/TeamAPI";
 import Spinner from "@/components/Spinner";
 import AddMemberModal from "@/components/team/AddMemberModal";
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Link, Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
 import { Fragment } from "react";
+import { toast } from "react-toastify";
 
 export default function ProjectTeamView() {
   const navigate = useNavigate();
@@ -17,6 +18,16 @@ export default function ProjectTeamView() {
     queryKey: ['projectTeam', projectId],
     queryFn: () => getProjectTeam(projectId),
     retry: false
+  })
+
+  const {mutate} = useMutation({
+    mutationFn: removeUserFromProject,
+    onError: (error) => {
+      toast.error(error.message)
+    },
+    onSuccess: (data) => {
+      toast.success(data)
+    }
   })
   
   if(isLoading) return <Spinner/>
@@ -76,11 +87,12 @@ export default function ProjectTeamView() {
                                         leaveFrom="transform opacity-100 scale-100"
                                         leaveTo="transform opacity-0 scale-95"
                                     >
-                                        <MenuItems className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
+                                        <MenuItems className="cursor-pointer absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
                                             <MenuItem>
                                                 <button
                                                     type='button'
-                                                    className='block px-3 py-1 text-sm leading-6 text-red-500'
+                                                    className='block px-3 py-1 text-sm leading-6 text-red-500 cursor-pointer'
+                                                    onClick={()=> mutate({projectId, id: member._id})}
                                                 >
                                                     Eliminar del Proyecto
                                                 </button>
