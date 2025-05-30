@@ -12,6 +12,7 @@ type ProjectCardProps = {
 };
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+
   const params = useParams();
   const projectId = params.projectId!;
   const navigate = useNavigate();

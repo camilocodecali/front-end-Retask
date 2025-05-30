@@ -3,16 +3,19 @@ import { useQuery } from "@tanstack/react-query";
 import { getProjects } from "@/api/ProjectAPI";
 import TableProjects from "@/components/projects/TableProjects";
 import Spinner from "@/components/Spinner";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function ProjectsView() {
+  const {data: user, isLoading: authLoading} = useAuth()
   const { data, isLoading } = useQuery({
     queryKey: ["projects"],
     queryFn: getProjects,
   });
 
-  if (isLoading) return <Spinner/>;
 
-  if (data)
+  if (isLoading && authLoading) return <Spinner/>;
+
+  if (data && user)
     return (
       <>
         <h1 className="text-4xl">Proyectos</h1>
@@ -81,7 +84,7 @@ export default function ProjectsView() {
                 {data.length ? (
                   <>
                     {data.map((project) => (
-                      <TableProjects key={project._id} project={project}/>
+                      <TableProjects key={project._id} project={project} user={user}/>
                     ))}
                   </>
                 ) : (

@@ -42,7 +42,7 @@ export const dashboardUserSchema = z.array(
         email: true,
         position: true,
         confirmed: true,
-        createdAt: true
+        createdAt: true,
     }).extend({
         _id: z.string()
     })
@@ -56,7 +56,7 @@ export const userTableSchema = authSchema.pick({
     email: true,
     position: true,
     confirmed: true,
-    createdAt: true
+    createdAt: true,
 }).extend({
     _id: z.string()
 })
@@ -94,6 +94,20 @@ export const taskProjectSchema = taskSchema.pick({
 export type Task = z.infer<typeof taskSchema>
 export type TaskFormData = Pick<Task, 'taskName' | 'taskDescription' | 'startDate' | 'endDate' | 'folderProject' >
 export type TaskProject = z.infer<typeof taskProjectSchema>
+/**Team */
+export const teamMemberSchema = authSchema.pick({
+    name: true,
+    lastName: true,
+    email: true,
+    identification: true,
+    phone: true,
+    position: true
+}).extend({
+    _id: z.string()
+})
+export const teamMembersSchema = z.array(teamMemberSchema)
+export type TeamMember = z.infer<typeof teamMemberSchema>
+export type TeamMemberForm = Pick<TeamMember, 'email'>
 
 /**Projects */
 export const projectSchema = z.object({
@@ -106,6 +120,7 @@ export const projectSchema = z.object({
     startDate: z.string(),
     endDate: z.string(),
     folderProject: z.string(),
+    manager: userSchema
 })
 
 export const dashboardProjectSchema = z.array(
@@ -114,7 +129,8 @@ export const dashboardProjectSchema = z.array(
         projectName: true,
         startDate: true,
         clientName: true,
-        endDate: true
+        endDate: true,
+        manager: true
 
     })
 )
@@ -132,19 +148,5 @@ export const editProjectSchema = projectSchema.pick({
 
 export type Project = z.infer<typeof projectSchema>
 export type ProjectFormData = Pick<Project, 'projectName' | 'description' | 'clientName' | 'category' | 'startDate' | 'endDate' | 'folderProject'>
-export type ProjectTableData = Pick<Project, '_id' | 'projectName' | 'startDate' |  'clientName' | 'endDate' >
+export type ProjectTableData = Pick<Project, '_id' | 'projectName' | 'startDate' |  'clientName' | 'endDate' | 'manager' >
 
-/**Team */
-export const teamMemberSchema = authSchema.pick({
-    name: true,
-    lastName: true,
-    email: true,
-    identification: true,
-    phone: true,
-    position: true
-}).extend({
-    _id: z.string()
-})
-export const teamMembersSchema = z.array(teamMemberSchema)
-export type TeamMember = z.infer<typeof teamMemberSchema>
-export type TeamMemberForm = Pick<TeamMember, 'email'>
