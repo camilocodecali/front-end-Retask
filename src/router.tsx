@@ -11,6 +11,7 @@ import RegisterView from "./views/users/RegisterView";
 import UsersView from "./views/users/UsersView";
 import EditUserView from "./views/auth/EditUserView";
 import UserDetailsView from "./views/users/UserDetailsView";
+import ProjectTeamView from "./views/projects/ProjectTeamView";
 
 
 export default function router() {
@@ -23,6 +24,7 @@ export default function router() {
                 <Route path="/projects/create" element={<CreateProjectView/>}/>
                 <Route path="/projects/:projectId/" element={<ProjectDetailsView/>}/>
                 <Route path="/projects/:projectId/edit" element={<EditProjectView/>}/>
+                <Route path="/projects/:projectId/team" element={<ProjectTeamView/>}/>
                 <Route path="/users/register" element={<RegisterView/>}/>
                 <Route path="/users/" element={<UsersView/>}/>
                 <Route path="/users/:userId/" element={<UserDetailsView/>}/>
