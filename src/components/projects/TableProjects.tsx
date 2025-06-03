@@ -5,6 +5,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteProject } from "@/api/ProjectAPI";
 import { toast } from "react-toastify";
 import { formatDate } from "@/helpers/formatDate";
+import { useAuth } from "@/hooks/useAuth";
+import Spinner from "../Spinner";
+import { isManager } from "@/helpers/policies";
 
 type ProjectFormProps = {
   project: ProjectTableData;
@@ -12,6 +15,7 @@ type ProjectFormProps = {
 };
 
 export default function TableProjects({ project, user }: ProjectFormProps) {
+    const { data: userAuth, isLoading: authLoading } = useAuth();
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: deleteProject,
@@ -23,9 +27,15 @@ export default function TableProjects({ project, user }: ProjectFormProps) {
       queryClient.invalidateQueries({ queryKey: ["projects"] });
     },
   });
-  return (
+  if(authLoading) return <Spinner/>
+  if(project && userAuth) return (
     <tr key={project._id}>
-      <td className=" p-10">{project.projectName}</td>
+      <td className=" p-10">{project.projectName} <br></br>
+        {project.manager._id === user._id ?
+        <p className="font-bold text-xs uppercase bg-bg-second border-2 border-bg-second rounded-lg inline-block py-1 px-5 text-white">Lider</p>  : 
+        <p className="font-bold text-xs uppercase bg-green-700 border-2 border-green-700 rounded-lg inline-block py-1 px-5 text-white">Miembro del equipo</p>
+      }
+      </td>
       <td className=" p-10">{formatDate(project.startDate)}</td>
       <td className=" p-10">{project.clientName}</td>
       <td className=" p-10">{project.manager.name}</td>
@@ -48,7 +58,7 @@ export default function TableProjects({ project, user }: ProjectFormProps) {
                 Ver Proyecto
               </Link>
             </MenuItem>
-            {project.manager._id === user?._id && (
+            {isManager(project.manager, user._id) && (
               <>
                 <MenuItem>
                   <Link
