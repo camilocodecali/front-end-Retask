@@ -6,16 +6,14 @@ import { deleteProject } from "@/api/ProjectAPI";
 import { formatDate } from "@/helpers/formatDate";
 import { toast } from "react-toastify";
 import { Project } from "@/types/index";
-import { useAuth } from "@/hooks/useAuth";
-import Spinner from "../Spinner";
-import { isManager } from "@/helpers/policies";
+
 
 type ProjectCardProps = {
   project: Project;
+  canEdit: boolean
 };
 
-export default function ProjectCard({ project }: ProjectCardProps) {
-  const { data: user, isLoading: authLoading } = useAuth();
+export default function ProjectCard({ project, canEdit }: ProjectCardProps) {
 
   const params = useParams();
   const projectId = params.projectId!;
@@ -31,8 +29,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       navigate("/projects");
     },
   });
-  if (authLoading) return <Spinner />;
-  if (project && user)
+
+  if (project)
     return (
       <div className="bg-white w-full shadow mt-10 rounded-lg p-5">
         <div className="md:flex justify-between mb-10 sm:grid sm:grid-cols-1">
@@ -46,7 +44,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             >
               Responsables
             </Link>
-            {isManager(project.manager, user._id) && (
+            {canEdit && (
               <>
                 <Link
                   to={`/projects/${project._id}/edit`}

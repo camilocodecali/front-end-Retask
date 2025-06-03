@@ -14,8 +14,11 @@ import TaskList from "@/components/tasks/TaskList";
 import EditTaskData from "@/components/tasks/EditTaskData";
 import DetailTaskModal from "@/components/tasks/DetailTaskModal";
 import Spinner from "@/components/Spinner";
+import { useAuth } from "@/hooks/useAuth";
+import { useMemo } from "react";
 
 export default function ProjectDetailsView() {
+  const { data: user, isLoading: authLoading } = useAuth();
   const params = useParams();
   const projectId = params.projectId!;
   const navigate = useNavigate();
@@ -27,18 +30,20 @@ export default function ProjectDetailsView() {
     retry: false,
   });
 
+  const canEdit = useMemo(()=> data?.manager._id === user?._id, [data, user])
 
-  if (isLoading) return <Spinner/>;
+
+  if (isLoading && authLoading) return <Spinner/>;
   if (isError) return <Navigate to="/404" />;
 
-  if (data)
+  if (data && user)
     return (
       <div className="w-full grid grid-col-1">
         <div className="flex justify-end">
       <Link to="/projects" className="bg-back hover:bg-back-hover text-white px-10 py-2 rounded-lg cursor-pointer transition-colors">Volver</Link>
       </div>
       
-        <ProjectCard project={data} />
+        <ProjectCard project={data} canEdit={canEdit} />
 
         <div className="bg-bg-second shadow mt-10 rounded-lg p-5">
           <div className="mb-5 grid md:grid-cols-2 items-center">
@@ -55,7 +60,7 @@ export default function ProjectDetailsView() {
           </div>
         </div>
 
-        <TaskList tasks={data.tasks}/>
+        <TaskList tasks={data.tasks} canEdit={canEdit}/>
         <AddTaskModal />
         <DetailTaskModal/>
         <EditTaskData/>
