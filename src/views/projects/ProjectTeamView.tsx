@@ -7,8 +7,10 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link, Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
 import { Fragment } from "react";
 import { toast } from "react-toastify";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function ProjectTeamView() {
+  const { data: user, isLoading: authLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation()
   const params = useParams()
@@ -28,14 +30,14 @@ export default function ProjectTeamView() {
     },
     onSuccess: (data) => {
       toast.success(data)
-      queryClient.invalidateQueries({queryKey: ["projectTeam","68367b403e7f0477ec588c7d"]})
+      queryClient.invalidateQueries({queryKey: ["projectTeam",projectId]})
     }
   })
-  
-  if(isLoading) return <Spinner/>
+
+  if(isLoading && authLoading) return <Spinner/>
   if(isError) return <Navigate to={'/404'}/>
 
-  if (data) return (
+  if (data && user) return (
     <div className="w-full grid grid-col-1">
       <div className="flex justify-end">
         <Link
@@ -52,11 +54,14 @@ export default function ProjectTeamView() {
             Administra el equipo de trabajo para este proyecto
           </p>
         </div>
+  
         <button
          onClick={()=> navigate(location.pathname + '?addMember=true')}
          className="bg-success hover:bg-success-hover text-white text-lg font-bold py-2 mt-5 md:mt-0 px-8 rounded-lg shadow-lg text-center cursor-pointer">
           + Agregar responsables
         </button>
+   
+
       </div>
 
             <h2 className="text-4xl mt-5">Miembros actuales</h2>

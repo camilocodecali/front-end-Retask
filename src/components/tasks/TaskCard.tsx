@@ -1,7 +1,13 @@
 import { deleteTask } from "@/api/TaskAPI";
 import { formatDate } from "@/helpers/formatDate";
 import { TaskProject } from "@/types/index";
-import { Menu, MenuButton, MenuItem, MenuItems, Transition } from "@headlessui/react";
+import {
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  Transition,
+} from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Fragment } from "react";
@@ -38,6 +44,7 @@ export default function TaskCard({ task, canEdit }: TaskCardProps) {
         <button
           type="button"
           className="text-xl font-bold text-slate-600 text-left"
+          onClick={() => navigate(location.pathname + `?viewTask=${task._id}`)}
         >
           {task.taskName}
         </button>

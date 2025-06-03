@@ -48,13 +48,15 @@ export default function ProjectDetailsView() {
         <div className="bg-bg-second shadow mt-10 rounded-lg p-5">
           <div className="mb-5 grid md:grid-cols-2 items-center">
             <h1 className="text-4xl text-white">Tareas del Proyectos</h1>
-
+        {canEdit && (
             <button
               onClick={() => navigate(location.pathname + "?newTask=true")}
               className="bg-success hover:bg-success-hover text-white text-lg font-bold py-2 mt-5 md:mt-0 px-8 rounded-lg shadow-lg text-center cursor-pointer"
             >
               + Crear
             </button>
+        )}
+
 
             <div></div>
           </div>
@@ -62,7 +64,7 @@ export default function ProjectDetailsView() {
 
         <TaskList tasks={data.tasks} canEdit={canEdit}/>
         <AddTaskModal />
-        <DetailTaskModal/>
+        <DetailTaskModal canEdit={canEdit}/>
         <EditTaskData/>
       </div>
     );

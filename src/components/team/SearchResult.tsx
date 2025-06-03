@@ -24,7 +24,9 @@ export default function SearchResult({user, reset}: SearchResultProps) {
             toast.success(data)
             reset()
             navigate(location.pathname, { replace: true })
-            queryClient.invalidateQueries({queryKey: ["projectTeam","68367b403e7f0477ec588c7d"]})
+            queryClient.invalidateQueries({queryKey: ["projectTeam",projectId]
+
+})
         }
     })
 
