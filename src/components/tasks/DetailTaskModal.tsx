@@ -1,5 +1,11 @@
 import { Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
+import {
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
 import {
   Link,
   Navigate,
@@ -82,7 +88,6 @@ export default function DetailTaskModal({ canEdit }: TaskModalProps) {
     mutationStatus.mutate(data);
   };
 
-
   if (isError) {
     toast.error(error.message, { toastId: "error" });
     return <Navigate to={`/projects/${projectId}`} />;
@@ -97,7 +102,7 @@ export default function DetailTaskModal({ canEdit }: TaskModalProps) {
             className="relative z-10"
             onClose={() => navigate(location.pathname, { replace: true })}
           >
-            <Transition.Child
+            <TransitionChild
               as={Fragment}
               enter="ease-out duration-300"
               enterFrom="opacity-0"
@@ -107,11 +112,11 @@ export default function DetailTaskModal({ canEdit }: TaskModalProps) {
               leaveTo="opacity-0"
             >
               <div className="fixed inset-0 bg-black/60" />
-            </Transition.Child>
+            </TransitionChild>
 
             <div className="fixed inset-0 overflow-y-auto">
               <div className="flex min-h-full items-center justify-center p-4 text-center">
-                <Transition.Child
+                <TransitionChild
                   as={Fragment}
                   enter="ease-out duration-300"
                   enterFrom="opacity-0 scale-95"
@@ -120,14 +125,23 @@ export default function DetailTaskModal({ canEdit }: TaskModalProps) {
                   leaveFrom="opacity-100 scale-100"
                   leaveTo="opacity-0 scale-95"
                 >
-                  <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16">
+                  <DialogPanel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16">
                     <p className="text-sm text-slate-400">
                       Agregada el: {formatDate(data.createdAt)}
                     </p>
                     <p className="text-sm text-slate-400">
                       Última actualización: {formatDate(data.updatedAt)}
                     </p>
-                    <Dialog.Title
+                    {data.completedBy && (
+                      <p>
+                        <span className="font-bold text-slate-600 pr-2">
+                          {" "}
+                          Estado actualizado por: 
+                        </span>
+                         {data.completedBy.name}
+                      </p>
+                    )}
+                    <DialogTitle
                       as="h3"
                       className="font-black text-slate-600 my-5"
                     >
@@ -160,7 +174,7 @@ export default function DetailTaskModal({ canEdit }: TaskModalProps) {
                           )}
                         </div>
                       </div>
-                    </Dialog.Title>
+                    </DialogTitle>
 
                     <div className="bg-white w-full">
                       <div className="flex items-center mb-5">
@@ -214,8 +228,8 @@ export default function DetailTaskModal({ canEdit }: TaskModalProps) {
                         </div>
                       </div>
                     </div>
-                  </Dialog.Panel>
-                </Transition.Child>
+                  </DialogPanel>
+                </TransitionChild>
               </div>
             </div>
           </Dialog>
