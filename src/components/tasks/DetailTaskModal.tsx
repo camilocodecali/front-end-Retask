@@ -37,7 +37,6 @@ export default function DetailTaskModal({ canEdit }: TaskModalProps) {
     enabled: !!taskId,
     retry: false,
   });
-
   const queryClient = useQueryClient();
 
   const mutationDelete = useMutation({
@@ -83,7 +82,6 @@ export default function DetailTaskModal({ canEdit }: TaskModalProps) {
     mutationStatus.mutate(data);
   };
 
-  console.log(canEdit);
 
   if (isError) {
     toast.error(error.message, { toastId: "error" });
