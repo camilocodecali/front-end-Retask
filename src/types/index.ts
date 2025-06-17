@@ -77,7 +77,11 @@ export const taskSchema = z.object({
     startDate: z.string(),
     endDate: z.string(),
     folderProject: z.string(),
-    completedBy: userSchema.or(z.null()),
+    completedBy: z.array(z.object({
+        _id: z.string(),
+        user: userSchema,
+        status: taskStatusSchema
+    })),
     createdAt: z.string(),
     updatedAt: z.string(),
 })

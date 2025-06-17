@@ -132,15 +132,18 @@ export default function DetailTaskModal({ canEdit }: TaskModalProps) {
                     <p className="text-sm text-slate-400">
                       Última actualización: {formatDate(data.updatedAt)}
                     </p>
-                    {data.completedBy && (
-                      <p>
+                    <p className="text-lg text-slate-500 mb-2">Historial de Cambios</p>
+                    <ul className="list-decimal">
+                    {data.completedBy.map((activityLog)=>(
+                      <li key={activityLog._id}>
                         <span className="font-bold text-slate-600 pr-2">
                           {" "}
-                          Estado actualizado por: 
+                          {statusTranslations[activityLog.status]} 
                         </span>
-                         {data.completedBy.name}
-                      </p>
-                    )}
+                         Estado actualizado por: {activityLog.user.name}
+                      </li>
+                    ))}
+                    </ul>
                     <DialogTitle
                       as="h3"
                       className="font-black text-slate-600 my-5"
