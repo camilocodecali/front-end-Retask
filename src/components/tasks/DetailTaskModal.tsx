@@ -21,6 +21,7 @@ import { toast } from "react-toastify";
 import { formatDate } from "@/helpers/formatDate";
 import { statusTranslations } from "@/locales/es";
 import { TaskStatus } from "@/types/index";
+import NotesPanel from "../notes/NotesPanel";
 
 type TaskModalProps = {
   canEdit: boolean;
@@ -132,18 +133,25 @@ export default function DetailTaskModal({ canEdit }: TaskModalProps) {
                     <p className="text-sm text-slate-400">
                       Última actualización: {formatDate(data.updatedAt)}
                     </p>
-                    <p className="text-lg text-slate-500 mb-2">Historial de Cambios</p>
-                    <ul className="list-decimal">
-                    {data.completedBy.map((activityLog)=>(
-                      <li key={activityLog._id}>
-                        <span className="font-bold text-slate-600 pr-2">
-                          {" "}
-                          {statusTranslations[activityLog.status]} 
-                        </span>
-                         Estado actualizado por: {activityLog.user.name}
-                      </li>
-                    ))}
-                    </ul>
+                    {data.completedBy.length ? (
+                      <>
+                        <p className="text-lg text-slate-500 mb-2">
+                          Historial de Cambios
+                        </p>
+                        <ul className="list-decimal">
+                          {data.completedBy.map((activityLog) => (
+                            <li key={activityLog._id}>
+                              <span className="font-bold text-slate-600 pr-2">
+                                {" "}
+                                {statusTranslations[activityLog.status]}
+                              </span>
+                              Estado actualizado por: {activityLog.user.name}
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    ) : null}
+
                     <DialogTitle
                       as="h3"
                       className="font-black text-slate-600 my-5"
@@ -231,6 +239,7 @@ export default function DetailTaskModal({ canEdit }: TaskModalProps) {
                         </div>
                       </div>
                     </div>
+                  <NotesPanel/>
                   </DialogPanel>
                 </TransitionChild>
               </div>
