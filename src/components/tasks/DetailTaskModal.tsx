@@ -239,7 +239,9 @@ export default function DetailTaskModal({ canEdit }: TaskModalProps) {
                         </div>
                       </div>
                     </div>
-                  <NotesPanel/>
+                  <NotesPanel
+                    notes= {data.notes}
+                  />
                   </DialogPanel>
                 </TransitionChild>
               </div>
