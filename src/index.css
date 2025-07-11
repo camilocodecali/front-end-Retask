@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@plugin "@tailwindcss/forms";
 
 @theme {
     --color-success: #10B981;

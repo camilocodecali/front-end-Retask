@@ -12,6 +12,7 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
+    "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/vite": "^4.0.0",
     "@tanstack/react-query": "^5.65.1",
     "@tanstack/react-query-devtools": "^5.66.0",

@@ -12,6 +12,9 @@ import UsersView from "./views/users/UsersView";
 import EditUserView from "./views/auth/EditUserView";
 import UserDetailsView from "./views/users/UserDetailsView";
 import ProjectTeamView from "./views/projects/ProjectTeamView";
+import ProfileView from "./views/profile/ProfileView";
+import ChangePasswordView from "./views/profile/ChangePasswordView";
+import ProfileLayout from "./layouts/ProfileLayout";
 
 
 export default function router() {
@@ -30,6 +33,10 @@ export default function router() {
                 <Route path="/users/:userId/" element={<UserDetailsView/>}/>
                 <Route path="/users/:userId/edit" element={<EditUserView/>}/>
 
+                <Route element={<ProfileLayout/>}>
+                    <Route path="/profile" element={<ProfileView/>}/>
+                    <Route path="/profile/password" element={<ChangePasswordView/>}/>
+                </Route>
             </Route>
             <Route element={<AuthLayout/>}>
                 <Route path="/auth/login" element={<LoginView/>}/>
