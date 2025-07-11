@@ -63,6 +63,7 @@ export const userTableSchema = authSchema.pick({
 
 export type User = z.infer<typeof userSchema>
 export type UserTableData = z.infer<typeof userTableSchema>
+export type UserProfileForm = Pick<User, 'name' | 'email'>
 
 /**Notes */
 export const noteSchema = z.object({
