@@ -32,6 +32,16 @@ export const userSchema = authSchema.pick({
     _id: z.string()
 })
 
+export const profileSchema = authSchema.pick({
+    name: true,
+    lastName: true,
+    phone: true,
+    email: true,
+    position: true,
+}).extend({
+    _id: z.string()
+})
+
 
 export const dashboardUserSchema = z.array(
     authSchema.pick({
@@ -63,7 +73,8 @@ export const userTableSchema = authSchema.pick({
 
 export type User = z.infer<typeof userSchema>
 export type UserTableData = z.infer<typeof userTableSchema>
-export type UserProfileForm = Pick<User, 'name' | 'email'>
+export type Profile = z.infer<typeof profileSchema>
+export type UserProfileForm = Pick<Profile, 'name' | 'lastName'  | 'phone'>
 
 /**Notes */
 export const noteSchema = z.object({
