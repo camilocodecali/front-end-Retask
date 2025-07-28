@@ -59,7 +59,7 @@ export default function ProfileForm({ data }: ProfileFormProps) {
                 required: "Apellido de usuario es obligatoro",
               })}
             />
-            {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
+            {errors.lastName && <ErrorMessage>{errors.lastName.message}</ErrorMessage>}
           </div>
 
                     <div className="mb-5 space-y-3">
@@ -75,13 +75,13 @@ export default function ProfileForm({ data }: ProfileFormProps) {
                 required: "Teléfono de usuario es obligatoro",
               })}
             />
-            {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
+            {errors.phone && <ErrorMessage>{errors.phone.message}</ErrorMessage>}
           </div>
 
           <input
             type="submit"
             value="Guardar Cambios"
-            className="bg-fuchsia-600 w-full p-3 text-white uppercase font-bold hover:bg-fuchsia-700 cursor-pointer transition-colors"
+            className="bg-bg-second w-full p-3 text-white uppercase font-bold hover:bg-blue-800 cursor-pointer transition-colors"
           />
         </form>
       </div>
