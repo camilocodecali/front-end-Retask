@@ -6,6 +6,7 @@ export type UserPosition = z.infer<typeof userPositionSchema>
 /**Auth user */
 export const authSchema = z.object({
     email: z.string(),
+    current_password: z.string(),
     password: z.string(),
     password_confirmation: z.string(),
     name: z.string(),
@@ -21,6 +22,8 @@ export const authSchema = z.object({
 type Auth = z.infer<typeof authSchema>
 export type UserLoginForm = Pick<Auth, 'email' | 'password'>
 export type UserRegistrationForm = Pick<Auth, 'name' | 'lastName'| 'identification' | 'email' | 'phone' | 'position' | 'password' | 'password_confirmation'>
+export type userUpdateForm = Pick<Auth, 'name' | 'lastName' | 'email' | 'phone' | 'position' >
+export type UpdateCurrentPasswordForm = Pick<Auth, 'current_password' | 'password' | 'password_confirmation'>
 export type ConfirmEmail = Pick<Auth, 'email'>
 
 /**Users */

@@ -1,8 +1,12 @@
 import { useForm } from "react-hook-form"
 import ErrorMessage from "@/components/ErrorMessage"
+import { UpdateCurrentPasswordForm } from "@/types/index";
+import { useMutation } from "@tanstack/react-query";
+import { changePassword } from "@/api/ProfileAPI";
+import { toast } from "react-toastify";
 
 export default function ChangePasswordView() {
-  const initialValues = {
+  const initialValues: UpdateCurrentPasswordForm = {
     current_password: '',
     password: '',
     password_confirmation: ''
@@ -12,8 +16,18 @@ export default function ChangePasswordView() {
 
   const password = watch('password');
 
-  const handleChangePassword = (formData) => {
-    console.log(formData);
+  const {mutate} = useMutation({
+    mutationFn: changePassword,
+    onError: (error) => {
+      toast.error(error.message)
+    },
+    onSuccess: (data) => {
+      toast.success(data)
+    }
+  })
+
+  const handleChangePassword = (formData: UpdateCurrentPasswordForm) => {
+    mutate(formData)
     
    }
 
