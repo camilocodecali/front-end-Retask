@@ -4,6 +4,7 @@ import { getProjects } from "@/api/ProjectAPI";
 import TableProjects from "@/components/projects/TableProjects";
 import Spinner from "@/components/Spinner";
 import { useAuth } from "@/hooks/useAuth";
+import DeleteProjectModal from "@/components/projects/DeleteProjectModal";
 
 export default function ProjectsView() {
   const {data: user, isLoading: authLoading} = useAuth()
@@ -104,6 +105,7 @@ export default function ProjectsView() {
             + Crear
           </Link>
         </div>
+        <DeleteProjectModal/>
       </>
     );
 }

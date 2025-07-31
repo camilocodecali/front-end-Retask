@@ -1,9 +1,6 @@
 import { ProjectTableData, User } from "@/types/index";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
-import { Link } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteProject } from "@/api/ProjectAPI";
-import { toast } from "react-toastify";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { formatDate } from "@/helpers/formatDate";
 import { useAuth } from "@/hooks/useAuth";
 import Spinner from "../Spinner";
@@ -15,18 +12,11 @@ type ProjectFormProps = {
 };
 
 export default function TableProjects({ project, user }: ProjectFormProps) {
+
+  const location = useLocation()
+  const navigate = useNavigate()
     const { data: userAuth, isLoading: authLoading } = useAuth();
-  const queryClient = useQueryClient();
-  const { mutate } = useMutation({
-    mutationFn: deleteProject,
-    onError: (error) => {
-      toast.error(error.message);
-    },
-    onSuccess: (data) => {
-      toast.success(data);
-      queryClient.invalidateQueries({ queryKey: ["projects"] });
-    },
-  });
+
   if(authLoading) return <Spinner/>
   if(project && userAuth) return (
     <tr key={project._id}>
@@ -71,7 +61,7 @@ export default function TableProjects({ project, user }: ProjectFormProps) {
                 <MenuItem>
                   <button
                     className="py-1 border-b-1 border-gray-300 block data-[focus]:bg-blue-100"
-                    onClick={() => mutate(project._id)}
+                    onClick={() => navigate(location.pathname + `?deleteProject=${project._id}`)}
                   >
                     Eliminar Proyecto
                   </button>

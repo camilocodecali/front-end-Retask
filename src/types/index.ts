@@ -25,6 +25,7 @@ export type UserRegistrationForm = Pick<Auth, 'name' | 'lastName'| 'identificati
 export type userUpdateForm = Pick<Auth, 'name' | 'lastName' | 'email' | 'phone' | 'position' >
 export type UpdateCurrentPasswordForm = Pick<Auth, 'current_password' | 'password' | 'password_confirmation'>
 export type ConfirmEmail = Pick<Auth, 'email'>
+export type CheckPasswordForm= Pick<Auth, 'password'>
 
 /**Users */
 export const userSchema = authSchema.pick({
