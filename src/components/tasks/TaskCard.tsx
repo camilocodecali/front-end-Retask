@@ -25,7 +25,6 @@ export default function TaskCard({ task, canEdit }: TaskCardProps) {
     id: task._id,
   });
 
-
   const navigate = useNavigate();
   const location = useLocation();
 

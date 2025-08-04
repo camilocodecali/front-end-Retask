@@ -58,7 +58,6 @@ export default function TaskList({ tasks, canEdit }: TaskListProps) {
     return { ...acc, [task.status]: currentGroup };
   }, initialStatusGroup);
 
-  
   const handleDragEnd = async (e: DragEndEvent) => {
     const {over, active} = e
     if(over && over.id){

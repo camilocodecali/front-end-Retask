@@ -38,6 +38,7 @@ export default function DetailTaskModal({ canEdit }: TaskModalProps) {
   const params = useParams();
   const projectId = params.projectId!;
 
+
   const { data, isError, error } = useQuery({
     queryKey: ["task", taskId],
     queryFn: () => getTaskById({ projectId, taskId }),
