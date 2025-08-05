@@ -30,10 +30,8 @@ export type CheckPasswordForm= Pick<Auth, 'password'>
 /**Users */
 export const userSchema = authSchema.pick({
     name: true,
-    lastName: true,
     email: true,
     position: true,
-    phone: true,
 }).extend({
     _id: z.string()
 })
