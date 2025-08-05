@@ -46,7 +46,7 @@ export default function ProjectsView() {
               />
             </div>
           </div>
-          <div className="flex justify-between mb-10 overflow-x-auto">
+          {/* <div className="flex justify-between mb-10 overflow-x-auto">
             <div className="block md:flex  gap-4">
               <p>Filtrar por:</p>
               <button className="bg-green-300 text-green-950 px-4 text-sm h-6 rounded-lg cursor-pointer font-bold mb-1 md:mb-0">
@@ -67,7 +67,7 @@ export default function ProjectsView() {
                 </select>
               </form>
             </div>
-          </div>
+          </div> */}
           <div className="relative overflow-x-auto">
             <table className="table-auto w-full border-collapse text-center">
               <thead>

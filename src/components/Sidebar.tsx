@@ -26,7 +26,7 @@ export default function Sidebar({ user }: SideMenuProps) {
         <Logo />
         <div className="px-5 py-5 text-white grid grid-cols-5 md:grid md:grid-cols-1">
           <Link to='/profile'><p className="py-2 px-2 mb-5 text-center text-sm bg-white text-blue-900 rounded-2xl">
-            ¡Hola, {user.name}!
+            ¡Hola, {user.name} {userAuth.lastName}!
           </p></Link>
           <Link className="block mb-5" to="/">
             Inicio
