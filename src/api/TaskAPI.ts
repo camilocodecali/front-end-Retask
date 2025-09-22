@@ -22,6 +22,10 @@ export async function createTask({formData, projectId}:Pick<TaskAPI, 'formData' 
     }
 }
 
+export async function getTasks() {
+
+}
+
 export async function getTaskById({projectId, taskId}: Pick<TaskAPI, 'projectId' | 'taskId'>) {
     try {
         const url = `/projects/${projectId}/tasks/${taskId}`

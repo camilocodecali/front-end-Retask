@@ -1,8 +1,11 @@
 import CategoryCard from "@/components/analytics/CategoryCard";
+import GeneralCard from "@/components/analytics/GeneralCard";
+import MemberSlider from "@/components/analytics/MemberSlider";
 import Spinner from "@/components/Spinner";
 import { useAuth } from "@/hooks/useAuth";
 
 export default function DashboardView() {
+  
   const projectCategories = [
     "web",
     "design",
@@ -25,6 +28,17 @@ export default function DashboardView() {
               projectCategory={projectCategory}
             />
           ))}
+        </div>
+        <div>
+          <GeneralCard/>
+        </div>
+        <div>
+          <MemberSlider/>
+        </div>
+        <div>
+          <button>Crear proyecto</button>
+          <button>Crear tarea</button>
+          <button>Usuarios</button>
         </div>
       </>
     );
