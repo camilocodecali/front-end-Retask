@@ -4,6 +4,7 @@ import MemberSlider from "@/components/analytics/MemberSlider";
 import Spinner from "@/components/Spinner";
 import { useAuth } from "@/hooks/useAuth";
 
+
 export default function DashboardView() {
   
   const projectCategories = [

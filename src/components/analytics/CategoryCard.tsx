@@ -1,6 +1,8 @@
 import { getProjects } from "@/api/ProjectAPI";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../Spinner";
+import { getTasks } from "@/api/TaskAPI";
+
 
 type CategoryCardProps = {
   projectCategory: string;
@@ -11,9 +13,19 @@ export default function CategoryCard({ projectCategory }: CategoryCardProps) {
     queryKey: ["projects"],
     queryFn: getProjects,
   });
-  console.log(data);
 
-  if (isLoading) return <Spinner />;
+  const {data:tasks, isLoading: isLoadingTasks} = useQuery({
+    queryKey: ['tasks'],
+    queryFn: getTasks
+  })
+console.log(tasks);
+
+
+  const filterProjects = data?.filter(project => project.category === projectCategory)
+ 
+
+
+  if (isLoading && isLoadingTasks) return <Spinner />;
   if (data)
     return (
       <div className="p-5 m-2 bg-white shadow-xl">
@@ -21,10 +33,7 @@ export default function CategoryCard({ projectCategory }: CategoryCardProps) {
           {projectCategory}
         </div>
         <div className="flex ">
-          <h3 className="font-bold">Proyectos:&nbsp;</h3> {data.length}
-        </div>
-        <div className="flex ">
-          <h3 className="font-bold">Tareas:&nbsp;</h3> {data.length}
+          <h3 className="font-bold">Proyectos:&nbsp;</h3> {filterProjects?.length}
         </div>
       </div>
     );
